@@ -6,16 +6,16 @@ import {
     USER_LOGIN_SUCCESS, USER_LOGOUT_FAILURE,
     USER_LOGOUT_SUCCESS
 } from "../constants";
-import {currentUserInterface} from "../types";
+import {CurrentUserInterface} from "../types/currentUser";
 
-const initialState: currentUserInterface = {
+const initialState: CurrentUserInterface = {
     data: {
         user: {},
         type: ""
     },
     isLoading: false
 };
-const currentUserReducer = (state = initialState, action: any): currentUserInterface => {
+const currentUserReducer = (state = initialState, action: any): CurrentUserInterface => {
     switch (action.type) {
         case USER_LOGIN_SUCCESS:
             return {

@@ -1,6 +1,5 @@
 import {
     USER_LOGIN_SUCCESS,
-    USERS_LOADING,
     USER_LOGIN_FAILURE,
     GET_USERS_SUCCESS,
     GET_USERS_FAILURE,
@@ -173,7 +172,7 @@ const usersSuccess = (type, data) => ({
 });
 
 const usersLoading = type => ({
-    type: type ? type : USERS_LOADING
+    type: type ? type : USER_LOADING
 });
 
 const usersFailure = type => ({

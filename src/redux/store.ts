@@ -1,10 +1,12 @@
 import {createStore, applyMiddleware} from "redux";
 import reducers from "./reducers";
 import thunk from "redux-thunk";
-import {currentUserInterface} from "./types";
+import {CurrentUserInterface} from "./types/currentUser";
+import {CategoriesInterface} from "./types/categories";
 
 export interface IRootState {
-    currentUser: currentUserInterface
+    currentUser: CurrentUserInterface,
+    categories: CategoriesInterface
 }
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);

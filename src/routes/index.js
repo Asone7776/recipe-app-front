@@ -8,6 +8,7 @@ import {getUser} from "../redux/actions/usersActions";
 import Cookies from "js-cookie";
 import DashLayout from '../layouts/DashLayout';
 import DashBoard from "../containers/DashBoard";
+import CategoriesList from "../containers/categories/List";
 
 export const routes = [
     {
@@ -18,6 +19,12 @@ export const routes = [
                 path: '/admin/dashboard',
                 isPrivate: true,
                 component: DashBoard
+            },
+            {
+                exact: true,
+                path: '/admin/categories',
+                isPrivate: true,
+                component: CategoriesList
             },
         ]
     },

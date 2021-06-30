@@ -1,20 +1,15 @@
 import React, {useState, FC} from 'react';
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {Layout, Menu, Button} from 'antd';
-import {Link, useHistory} from "react-router-dom";
+import {Link} from "react-router-dom";
 import Logo from "../images/logo.png";
 import {LogoutOutlined, DashboardOutlined} from "@ant-design/icons/lib/icons";
-import {IRootState} from "../redux/store";
 import {logoutUser} from "../redux/actions/usersActions";
 
 const {Header, Content, Sider} = Layout;
 
 const DashLayout: FC = ({children}) => {
     const [collapsed, setCollapsed] = useState(false);
-    const history = useHistory();
-    const {SubMenu} = Menu;
-
-    const currentUser = useSelector<IRootState>((state) => state.currentUser.data.user);
     const dispatch = useDispatch();
 
     const logOut = () => {

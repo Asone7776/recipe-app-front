@@ -1,12 +1,11 @@
 import {notification} from "antd";
 
-
-export const successNotify = (text = "OK") => {
+export const successNotify = (text: string = "OK") => {
     notification.success({
         message: text,
     });
 };
-export const failureNotify = (text = "Error") => {
+export const failureNotify = (text: string = "Error") => {
     notification.error({
         message: text
     });

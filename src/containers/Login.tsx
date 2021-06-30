@@ -1,4 +1,4 @@
-import React, {FC, useEffect} from 'react';
+import React, {FC} from 'react';
 import {Form, Input, Button} from 'antd';
 import {UserOutlined, LockOutlined} from '@ant-design/icons';
 import Logo from '../images/logo.png';
@@ -13,15 +13,10 @@ interface onFinish {
 
 const Login: FC = () => {
     const dispatch = useDispatch();
-    const user = useSelector<IRootState>(state => state.currentUser);
     const isLoading = useSelector<IRootState, boolean>(state => state.currentUser.isLoading);
-
     const onFinish = (values: onFinish) => {
         dispatch(loginUser(values));
     };
-    useEffect(() => {
-        console.log(isLoading)
-    }, [isLoading])
     return (
         <>
             <div className="login-logo">

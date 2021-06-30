@@ -1,4 +1,4 @@
-export interface currentUserInterface {
+export interface CurrentUserInterface {
     data: {
         user?: object,
         type: string

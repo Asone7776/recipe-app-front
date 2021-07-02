@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {useLocation, useHistory} from 'react-router-dom';
-import {Form, Input, Button, Col, Row} from 'antd';
+import {Form, Input, Button, Col, Row, Typography} from 'antd';
 import {IRootState} from "../../redux/store";
 import {axiosAuth} from "../../axios-instances";
 import {CategoryInterface} from "../../types/categories";
@@ -20,6 +20,7 @@ const AddAndEditCategory: FC = () => {
     const isLoading = useSelector<IRootState, boolean>((state) => state.categories.isLoading);
     const [form] = Form.useForm();
     const {TextArea} = Input;
+    const {Title} = Typography;
     useEffect(() => {
         if (location.state && location.state.categoryId) {
             axiosAuth.get(`/api/categories/${location.state.categoryId}`).then((response): void => {
@@ -53,6 +54,7 @@ const AddAndEditCategory: FC = () => {
             layout={'vertical'}
             onFinish={onFinish}
         >
+            <Title level={3}>{editCategory ? 'Редактировать категорию' : 'Добавить категорию'}</Title>
             <Row gutter={16}>
                 <Col span={24}>
                     <Form.Item

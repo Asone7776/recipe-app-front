@@ -6,21 +6,22 @@ import {getCategories, deleteCategory} from "../../redux/actions/categoriesActio
 import {EditFilled, DeleteFilled} from "@ant-design/icons";
 import {debounce} from "../../functions";
 import {IRootState} from "../../redux/store";
-import {CategoryResponse, CategoryInterface} from "../../redux/types/categories";
+import {CategoryResponse, CategoryInterface} from "../../types/categories";
 
 const CategoriesList = () => {
     const history = useHistory();
     const dispatch = useDispatch();
     const categories = useSelector<IRootState, CategoryResponse>((state) => state.categories.data.categories);
+    const isLoading = useSelector<IRootState, boolean>((state) => state.categories.isLoading);
     const [currentCategory, setCurrentCategory] = useState<CategoryInterface | null>(null);
-    const [currentPage, setCurrentPage] = useState<number>(1);
+    const [currentPage, setCurrentPage] = useState<number | null>(null);
     const [modal, setModal] = useState(false);
     const [search, setSearch] = useState<string | null>(null);
     const {Title} = Typography;
 
     useEffect(() => {
         dispatch(getCategories({
-            page: currentPage === 0 ? currentPage : currentPage - 1,
+            page: currentPage,
             search
         }));
     }, [dispatch, currentPage, search]);
@@ -59,7 +60,7 @@ const CategoriesList = () => {
                             history.push({
                                 pathname: `/admin/categories/edit/${record.id}`,
                             }, {
-                                category: record.id
+                                categoryId: record.id
                             });
                         }}>
                             <EditFilled/>
@@ -82,6 +83,7 @@ const CategoriesList = () => {
             <Table
                 dataSource={categories.data}
                 columns={columns}
+                loading={isLoading}
                 title={() => (
                     <>
 
@@ -94,7 +96,8 @@ const CategoriesList = () => {
                                         let targetValue = event.target.value;
                                         let val = targetValue === '' ? null : targetValue;
                                         verifySearch(val);
-                                    }}/>
+                                    }} allowClear
+                                    />
                                 </Col>
                                 <Col span={19} className={'bottomRightToEnd'}>
                                     <Button type={'primary'}>
@@ -110,8 +113,8 @@ const CategoriesList = () => {
                 )}
                 footer={() => ''}
                 pagination={{
-                    current: currentPage,
-                    defaultPageSize: 20,
+                    current: currentPage || 1,
+                    defaultPageSize: 15,
                     showSizeChanger: false,
                     total: categories && categories.total,
                     onChange: onPageChange

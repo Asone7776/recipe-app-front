@@ -4,7 +4,7 @@ import {Level} from "./level";
 export interface CategoryInterface {
     id: number,
     name: string,
-    description: string,
+    description?: string,
     created_at: Date,
     updated_at: Date,
 }

@@ -1,8 +1,8 @@
 import {createStore, applyMiddleware} from "redux";
 import reducers from "./reducers";
 import thunk from "redux-thunk";
-import {CurrentUserInterface} from "./types/currentUser";
-import {CategoriesInterface} from "./types/categories";
+import {CurrentUserInterface} from "../types/currentUser";
+import {CategoriesInterface} from "../types/categories";
 
 export interface IRootState {
     currentUser: CurrentUserInterface,

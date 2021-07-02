@@ -9,7 +9,7 @@ import {
     DELETE_CATEGORY_SUCCESS,
     DELETE_CATEGORY_FAILURE
 } from "../constants";
-import {CategoriesInterface, CategoryResponse} from "../types/categories";
+import {CategoriesInterface} from "../../types/categories";
 
 const initialState: CategoriesInterface = {
     data: {
@@ -26,7 +26,6 @@ const categoriesReducer = (state = initialState, action: any): CategoriesInterfa
     switch (action.type) {
         case GET_CATEGORIES_SUCCESS:
             return {
-                ...state,
                 data: {
                     categories: action.payload,
                     type: action.type
@@ -35,14 +34,77 @@ const categoriesReducer = (state = initialState, action: any): CategoriesInterfa
             };
         case GET_CATEGORIES_FAILURE:
             return {
-                ...state,
                 data: {
                     categories: state.data.categories,
                     type: action.type
                 },
                 isLoading: false
             };
-
+        case ADD_CATEGORY_SUCCESS:
+            return {
+                data: {
+                    categories: {
+                        ...state.data.categories,
+                        data: [state.data.categories.data, {...action.payload}]
+                    },
+                    type: action.type
+                },
+                isLoading: false
+            };
+        case ADD_CATEGORY_FAILURE:
+            return {
+                data: {
+                    categories: state.data.categories,
+                    type: action.type
+                },
+                isLoading: false
+            };
+        case UPDATE_CATEGORY_SUCCESS:
+            return {
+                data: {
+                    categories: {
+                        ...state.data.categories,
+                        data: state.data.categories.data && state.data.categories.data.map(item => {
+                            if (item.id === action.payload.id) {
+                                item = {
+                                    ...action.payload,
+                                }
+                            }
+                            return item;
+                        })
+                    },
+                    type: action.type
+                },
+                isLoading: false
+            };
+        case UPDATE_CATEGORY_FAILURE:
+            return {
+                data: {
+                    categories: state.data.categories,
+                    type: action.type
+                },
+                isLoading: false
+            };
+        case DELETE_CATEGORY_SUCCESS:
+            return {
+                ...state,
+                data: {
+                    categories: {
+                        ...state.data.categories,
+                        data: state.data.categories.data && state.data.categories.data.filter(item => item.id !== action.payload)
+                    },
+                    type: action.type
+                },
+                isLoading: false
+            };
+        case DELETE_CATEGORY_FAILURE:
+            return {
+                data: {
+                    categories: state.data.categories,
+                    type: action.type
+                },
+                isLoading: true
+            };
         case CATEGORIES_LOADING:
             return {
                 data: {

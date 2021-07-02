@@ -35,7 +35,7 @@ export const addCategory = data => {
     return async dispatch => {
         dispatch(categoriesLoading());
         await axiosAuth
-            .post("/api/categories/create", data)
+            .post("/api/categories", data)
             .then(response => {
                 console.log(response.data);
                 dispatch(categoriesSuccess(ADD_CATEGORY_SUCCESS, response.data));
@@ -50,11 +50,11 @@ export const addCategory = data => {
     };
 };
 
-export const updateCategory = (data, id) => {
+export const updateCategory = (data) => {
     return async dispatch => {
         dispatch(categoriesLoading());
         await axiosAuth
-            .put(`/api/categories/${id}`, data)
+            .put(`/api/categories/${data.id}`, data)
             .then(response => {
                 successNotify("Категория обновлена");
                 dispatch(categoriesSuccess(UPDATE_CATEGORY_SUCCESS, response.data));

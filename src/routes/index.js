@@ -9,6 +9,7 @@ import Cookies from "js-cookie";
 import DashLayout from '../layouts/DashLayout';
 import DashBoard from "../containers/DashBoard";
 import CategoriesList from "../containers/categories/List";
+import AddAndEditCategory from "../containers/categories/AddAndEditCategory";
 
 export const routes = [
     {
@@ -25,6 +26,18 @@ export const routes = [
                 path: '/admin/categories',
                 isPrivate: true,
                 component: CategoriesList
+            },
+            {
+                exact: true,
+                path: '/admin/categories/add',
+                isPrivate: true,
+                component: AddAndEditCategory
+            },
+            {
+                exact: true,
+                path: '/admin/categories/edit/:id',
+                isPrivate: true,
+                component: AddAndEditCategory
             },
         ]
     },

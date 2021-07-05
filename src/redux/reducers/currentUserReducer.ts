@@ -6,7 +6,7 @@ import {
     USER_LOGIN_SUCCESS, USER_LOGOUT_FAILURE,
     USER_LOGOUT_SUCCESS
 } from "../constants";
-import {CurrentUserInterface} from "../../types/currentUser";
+import {CurrentUserInterface} from "../../types/users";
 
 const initialState: CurrentUserInterface = {
     data: {

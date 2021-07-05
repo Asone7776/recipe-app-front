@@ -37,7 +37,6 @@ export const addCategory = data => {
         await axiosAuth
             .post("/api/categories", data)
             .then(response => {
-                console.log(response.data);
                 dispatch(categoriesSuccess(ADD_CATEGORY_SUCCESS, response.data));
                 successNotify("Категория добавлена");
             })

@@ -1,6 +1,3 @@
-import {Level} from "./level";
-
-
 export interface CategoryInterface {
     id: number,
     name: string,

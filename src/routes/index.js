@@ -1,4 +1,4 @@
-import React, {useEffect, FC} from "react";
+import React, {useEffect} from "react";
 import {BrowserRouter as Router, Switch, Route, Redirect} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import CustomRoute from "./Route";
@@ -10,6 +10,10 @@ import DashLayout from '../layouts/DashLayout';
 import DashBoard from "../containers/DashBoard";
 import CategoriesList from "../containers/categories/List";
 import AddAndEditCategory from "../containers/categories/AddAndEditCategory";
+import TagsList from "../containers/tags/List";
+import AddAndEditTag from "../containers/tags/AddAndEditTag";
+import CommentsList from "../containers/comments/List";
+import AddAndEditComment from "../containers/comments/AddAndEditComment";
 
 export const routes = [
     {
@@ -38,6 +42,42 @@ export const routes = [
                 path: '/admin/categories/edit/:id',
                 isPrivate: true,
                 component: AddAndEditCategory
+            },
+            {
+                exact: true,
+                path: '/admin/tags',
+                isPrivate: true,
+                component: TagsList
+            },
+            {
+                exact: true,
+                path: '/admin/tags/add',
+                isPrivate: true,
+                component: AddAndEditTag
+            },
+            {
+                exact: true,
+                path: '/admin/tags/edit/:id',
+                isPrivate: true,
+                component: AddAndEditTag
+            },
+            {
+                exact: true,
+                path: '/admin/comments',
+                isPrivate: true,
+                component: CommentsList
+            },
+            {
+                exact: true,
+                path: '/admin/comments/add',
+                isPrivate: true,
+                component: AddAndEditComment
+            },
+            {
+                exact: true,
+                path: '/admin/comments/edit/:id',
+                isPrivate: true,
+                component: AddAndEditComment
             },
         ]
     },

@@ -67,11 +67,11 @@ const DashLayout: FC = ({children}) => {
                             Пользователи
                         </Link>
                     </Menu.Item>
-                    <Menu.Item key={'8'} icon={<DashboardOutlined/>}>
-                        <Link to={'/admin/roles'}>
-                            Роли
-                        </Link>
-                    </Menu.Item>
+                    {/*<Menu.Item key={'8'} icon={<DashboardOutlined/>}>*/}
+                    {/*    <Link to={'/admin/roles'}>*/}
+                    {/*        Роли*/}
+                    {/*    </Link>*/}
+                    {/*</Menu.Item>*/}
                 </Menu>
             </Sider>
             <Layout className="site-layout">

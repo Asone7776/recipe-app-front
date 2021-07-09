@@ -1,40 +1,49 @@
-import React, {FC} from 'react';
+import React, {FC, useState, useEffect} from 'react';
 import {Select} from 'antd';
+import {UsersLookupInterface} from "../types/users";
+import {RecipesLookupInterface} from "../types/recipes";
 
 const {Option} = Select;
 
 export interface SearchProps {
     placeholder?: string,
-    isLoading: boolean
+    isLoading: boolean,
+    value: string | null,
+    options: UsersLookupInterface[] | RecipesLookupInterface[],
+    whenSearch: (val: string) => void
 }
 
-const RemoteSearch: FC<SearchProps> = ({placeholder = 'Поиск', isLoading}) => {
+const RemoteSearch: FC<SearchProps> = ({whenSearch, options, value, placeholder = 'Поиск', isLoading}) => {
+    const [search, setSearch] = useState('');
 
-    function onChange(value: string) {
+    const onChange = (value: string) => {
         console.log(`selected ${value}`);
     }
 
-    function onBlur() {
-        console.log('blur');
+    const onSearch = (val: string) => {
+        setSearch(val);
     }
 
+    useEffect(() => {
+        whenSearch(search);
+    }, [whenSearch, search]);
 
-    function onSearch(val: string) {
-        console.log('search:', val);
-    }
-
+    console.log(options);
     return (
         <Select
             showSearch
             loading={isLoading}
             placeholder={placeholder}
             onChange={onChange}
-            onBlur={onBlur}
+            searchValue={search}
+            // onBlur={onBlur}
             onSearch={onSearch}
+            // value={value ? value : ''}
         >
-            <Option value="jack">Jack</Option>
-            <Option value="lucy">Lucy</Option>
-            <Option value="tom">Tom</Option>
+            <Option value="">Не выбрано</Option>
+            {options && options.map(item => (
+                <Option key={item.id} value={item.id}>{item.name}</Option>
+            ))}
         </Select>
     )
 };

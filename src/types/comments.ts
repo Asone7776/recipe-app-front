@@ -7,8 +7,10 @@ export interface CommentInterface {
     message?: string,
     created_at?: Date,
     updated_at?: Date,
+    recipe_id: number,
+    user_id: number,
     user: UserInterface,
-    recipes: RecipeInterface
+    recipe: RecipeInterface
 }
 
 export interface CommentsResponse {

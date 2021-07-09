@@ -15,3 +15,8 @@ export interface UserInterface {
     created_at?: Date,
     updated_at?: Date
 }
+
+export interface UsersLookupInterface {
+    id: number,
+    name: string
+}

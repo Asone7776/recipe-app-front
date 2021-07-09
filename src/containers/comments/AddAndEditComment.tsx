@@ -5,8 +5,11 @@ import {Form, Input, Button, Col, Row, Typography} from 'antd';
 import {IRootState} from "../../redux/store";
 import {axiosAuth} from "../../axios-instances";
 import {CommentInterface} from "../../types/comments";
+import {UsersLookupInterface} from "../../types/users";
+import {RecipesLookupInterface} from "../../types/recipes";
 import {addComment, updateCategory} from "../../redux/actions/commentsActions";
-import RemoteSearch from "../../components/RemoteSearch";
+import SearchAllUsers from "../../components/SearchAllUsers";
+import SearchAllRecipes from "../../components/SearchAllRecipes";
 
 interface CommentValues {
     message: string,
@@ -24,6 +27,7 @@ const AddAndEditComment: FC = () => {
     const {Title} = Typography;
     const {TextArea} = Input;
     useEffect(() => {
+
         if (location.state && location.state.commentId) {
             axiosAuth.get(`/api/comments/${location.state.commentId}`).then((response): void => {
                 setEditComment(response.data);
@@ -32,9 +36,11 @@ const AddAndEditComment: FC = () => {
     }, [location])
     useEffect(() => {
         if (editComment) {
-            let {message} = editComment;
+            let {message, user_id, recipe_id} = editComment;
             form.setFieldsValue({
-                message
+                message,
+                user_id,
+                recipe_id
             })
         }
     }, [editComment, form]);
@@ -55,6 +61,9 @@ const AddAndEditComment: FC = () => {
             form={form}
             layout={'vertical'}
             onFinish={onFinish}
+            onValuesChange={() => {
+                // console.log(form.getFieldsValue());
+            }}
         >
             <Title level={3}>{editComment ? 'Редактировать комментарий' : 'Добавить комментарий'}</Title>
             <Row gutter={16}>
@@ -69,7 +78,14 @@ const AddAndEditComment: FC = () => {
                             },
                         ]}
                     >
-                        <RemoteSearch isLoading={false}/>
+                        <SearchAllUsers
+                            initialSearchValue={editComment && editComment.user && editComment.user.name}
+                            initialValue={editComment && editComment.user && editComment.user.id}
+                            onUserSelect={(user_id: number) => {
+                                form.setFieldsValue({
+                                    user_id
+                                })
+                            }}/>
                     </Form.Item>
                 </Col>
                 <Col span={12}>
@@ -83,7 +99,14 @@ const AddAndEditComment: FC = () => {
                             },
                         ]}
                     >
-                        <RemoteSearch isLoading={false}/>
+                        <SearchAllRecipes
+                            initialSearchValue={editComment && editComment.recipe && editComment.recipe.name}
+                            initialValue={editComment && editComment.recipe && editComment.recipe.id}
+                            onUserSelect={(recipe_id: number) => {
+                                form.setFieldsValue({
+                                    recipe_id
+                                })
+                            }}/>
                     </Form.Item>
                 </Col>
                 <Col span={24}>

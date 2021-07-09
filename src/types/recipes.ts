@@ -8,3 +8,8 @@ export interface RecipeInterface {
     created_at?:Date,
     updated_at?:Date
 }
+
+export interface RecipesLookupInterface {
+    id: number,
+    name: string
+}

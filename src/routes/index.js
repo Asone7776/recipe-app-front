@@ -14,6 +14,8 @@ import TagsList from "../containers/tags/List";
 import AddAndEditTag from "../containers/tags/AddAndEditTag";
 import CommentsList from "../containers/comments/List";
 import AddAndEditComment from "../containers/comments/AddAndEditComment";
+import IngredientsList from "../containers/ingredients/List";
+import AddAndEditIngredient from "../containers/ingredients/AddAndEditIngredient";
 
 export const routes = [
     {
@@ -78,6 +80,24 @@ export const routes = [
                 path: '/admin/comments/edit/:id',
                 isPrivate: true,
                 component: AddAndEditComment
+            },
+            {
+                exact: true,
+                path: '/admin/ingredients',
+                isPrivate: true,
+                component: IngredientsList
+            },
+            {
+                exact: true,
+                path: '/admin/ingredients/add',
+                isPrivate: true,
+                component: AddAndEditIngredient
+            },
+            {
+                exact: true,
+                path: '/admin/ingredients/edit/:id',
+                isPrivate: true,
+                component: AddAndEditIngredient
             },
         ]
     },

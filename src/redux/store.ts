@@ -6,13 +6,15 @@ import {CategoriesInterface} from "../types/categories";
 import {TagsInterface} from "../types/tags";
 import {CommentsInterface} from "../types/comments";
 import {IngredientsInterface} from "../types/ingredients";
+import {RecipesInterface} from "../types/recipes";
 
 export interface IRootState {
     currentUser: CurrentUserInterface,
     categories: CategoriesInterface,
     tags: TagsInterface,
     comments: CommentsInterface,
-    ingredients: IngredientsInterface
+    ingredients: IngredientsInterface,
+    recipes: RecipesInterface
 }
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);

@@ -4,6 +4,7 @@ export interface CategoryInterface {
     description?: string,
     created_at: Date,
     updated_at: Date,
+    value?:number,
 }
 
 export interface CategoryResponse {

@@ -11,9 +11,7 @@ import {store} from "./redux/store";
 ReactDOM.render(
     <Provider store={store}>
         <ConfigProvider locale={locale}>
-            <React.StrictMode>
-                <App/>
-            </React.StrictMode>
+            <App/>
         </ConfigProvider>
     </Provider>,
     document.getElementById('root')

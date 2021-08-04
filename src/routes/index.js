@@ -17,6 +17,7 @@ import AddAndEditComment from "../containers/comments/AddAndEditComment";
 import IngredientsList from "../containers/ingredients/List";
 import AddAndEditIngredient from "../containers/ingredients/AddAndEditIngredient";
 import RecipesList from "../containers/recipes/List";
+import AddAndEditRecipe from "../containers/recipes/AddAndEditRecipe";
 
 export const routes = [
     {
@@ -105,6 +106,18 @@ export const routes = [
                 path: '/admin/recipes',
                 isPrivate: true,
                 component: RecipesList
+            },
+            {
+                exact: true,
+                path: '/admin/recipes/add',
+                isPrivate: true,
+                component: AddAndEditRecipe
+            },
+            {
+                exact: true,
+                path: '/admin/recipes/edit/:id',
+                isPrivate: true,
+                component: AddAndEditRecipe
             },
         ]
     },

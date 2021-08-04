@@ -3,6 +3,7 @@ export interface TagInterface {
     name: string,
     created_at?: Date,
     updated_at?: Date,
+    value?:number,
 }
 
 export interface TagResponse {

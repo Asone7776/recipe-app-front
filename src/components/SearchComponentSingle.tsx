@@ -49,8 +49,8 @@ function DebounceSelect<ValueType extends { key?: string; label: ReactNode; valu
     }, [lookupUrl]);
     return (
         <Select<ValueType>
+            showSearch
             allowClear
-            labelInValue
             filterOption={false}
             onSearch={debounceFetcher}
             notFoundContent={fetching ? <Spin size="small"/> : null}
@@ -80,33 +80,29 @@ interface SearchComponentProps {
     lookupUrl: string,
     placeholder?: string,
     initialSearchValue?: string,
-    initialValue: any[],
-    onSelect: (val: any[]) => void
+    initialValue: any,
+    onChange?: () => void,
+    value?: number,
 }
 
-const SearchComponent: FC<SearchComponentProps> = ({
-                                                       placeholder = 'Поиск',
-                                                       lookupUrl,
-                                                       initialSearchValue,
-                                                       onSelect,
-                                                       initialValue
-                                                   }) => {
-    const [value, setValue] = useState<any[]>([]);
+const SearchComponentSingle: FC<SearchComponentProps> = ({
+                                                             placeholder = 'Поиск',
+                                                             lookupUrl,
+                                                             initialSearchValue,
+                                                             onChange,
+                                                             initialValue,
+                                                             value
+                                                         }) => {
     return (
         <DebounceSelect
-            mode="multiple"
             value={value}
             placeholder={placeholder}
             fetchOptions={fetchUserList}
-            onChange={newValue => {
-                setValue(newValue);
-                console.log(newValue);
-                onSelect(newValue);
-            }}
+            onChange={onChange}
             style={{width: '100%'}}
             lookupUrl={lookupUrl}
         />
     );
 };
 
-export default SearchComponent;
+export default SearchComponentSingle;

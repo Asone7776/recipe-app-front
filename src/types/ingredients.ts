@@ -7,6 +7,7 @@ export interface IngredientInterface {
     created_at?: Date,
     updated_at?: Date,
     recipes: RecipeInterface[]
+    value?: number,
 }
 
 export interface IngredientsResponse {
@@ -21,4 +22,10 @@ export interface IngredientsInterface {
         type: string
     },
     isLoading: boolean,
+}
+
+export interface IngredientsListInterface {
+    ingredient_id: number,
+    count: number,
+    unit: number
 }

@@ -65,7 +65,7 @@ const RecipesList = () => {
             dataIndex: 'tags',
             render: (tags: TagInterface[]) => (
                 <>
-                    {tags.map(tag => {
+                    {tags && tags.map(tag => {
                         return (
                             <Tag color={'geekblue'} key={tag.id}>
                                 {tag.name.toUpperCase()}

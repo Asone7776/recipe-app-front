@@ -1,4 +1,6 @@
 import {IngredientInterface} from "./ingredients";
+import {CategoryInterface} from "./categories";
+import {TagInterface} from "./tags";
 
 export interface RecipeInterface {
     id: number,
@@ -6,9 +8,12 @@ export interface RecipeInterface {
     description?: string,
     time_to_complete?: Date,
     likes?: number,
-    lever_id?: number,
-    created_at?: Date,
-    updated_at?: Date
+    level_id?: number,
+    created_at: Date,
+    updated_at: Date,
+    categories: CategoryInterface[] | [],
+    tags: TagInterface[] | [],
+    ingredients: IngredientInterface[] | []
 }
 
 export interface RecipesLookupInterface {

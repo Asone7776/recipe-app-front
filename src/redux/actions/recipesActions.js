@@ -33,7 +33,7 @@ export const getRecipes = params => {
     };
 };
 
-export const addRecipes = data => {
+export const addRecipe = data => {
     return async dispatch => {
         dispatch(recipesLoading());
         await axiosAuth

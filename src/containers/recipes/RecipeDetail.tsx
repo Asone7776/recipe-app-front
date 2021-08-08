@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {Form, Input, Button, Row, Col, Tooltip} from 'antd';
-import {MinusCircleOutlined, PlusOutlined} from '@ant-design/icons';
+import {DeleteOutlined, PlusOutlined} from '@ant-design/icons';
 import {SortableContainer, SortableElement, SortableHandle, SortEnd, SortEvent} from 'react-sortable-hoc';
 import {MenuOutlined} from '@ant-design/icons';
 
@@ -8,11 +8,11 @@ const DragHandle = SortableHandle(() => <MenuOutlined style={{cursor: 'grab', co
 // @ts-ignore
 const SortableItem = SortableElement(({field, remove}) => {
     return (
-        <Row gutter={16} key={`form-item-${field.key}`}>
+        <Row gutter={16} justify={'space-between'} key={`form-item-${field.key}`}>
             <Col span={1} className={'center-left'}>
                 <DragHandle/>
             </Col>
-            <Col span={22}>
+            <Col span={21}>
                 <Form.Item
                     {...field}
                     key={[field.fieldKey, 'name']}
@@ -34,9 +34,11 @@ const SortableItem = SortableElement(({field, remove}) => {
                 </Form.Item>
             </Col>
             <Col span={1} className={'center-right'} draggable={false}>
-                <Tooltip title={'Удалить'}>
-                    <MinusCircleOutlined onClick={() => remove(field.name)}/>
-                </Tooltip>
+                <Button onClick={() => remove(field.name)}>
+                    <Tooltip title={'Удалить'}>
+                        <DeleteOutlined/>
+                    </Tooltip>
+                </Button>
             </Col>
         </Row>
     )

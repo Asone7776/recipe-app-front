@@ -1,6 +1,6 @@
 import React, {FC, Fragment} from 'react';
 import {Button, Col, Form, Row, Tooltip, InputNumber} from "antd";
-import {PlusOutlined, MinusCircleOutlined} from "@ant-design/icons";
+import {PlusOutlined, DeleteOutlined} from "@ant-design/icons";
 import SearchComponentSingle from "../../components/SearchComponentSingle";
 import UnitsSelect from "../../components/UnitsSelect";
 
@@ -17,6 +17,7 @@ const IngredientsList: FC = () => {
                                     <Col span={7}>
                                         <Form.Item
                                             {...restField}
+                                            label={'Ингредиент'}
                                             name={[name, 'ingredient_id']}
                                             fieldKey={[fieldKey, 'ingredient_id']}
                                             rules={[{required: true, message: 'Выберите ингредиенты'}]}
@@ -31,6 +32,7 @@ const IngredientsList: FC = () => {
                                     <Col span={7}>
                                         <Form.Item
                                             {...restField}
+                                            label={'Количество'}
                                             name={[name, 'count']}
                                             fieldKey={[fieldKey, 'count']}
                                             rules={[{required: true, message: 'Введите количество'}]}
@@ -45,6 +47,7 @@ const IngredientsList: FC = () => {
                                     <Col span={7}>
                                         <Form.Item
                                             {...restField}
+                                            label={'Единица измерения'}
                                             name={[name, 'unit']}
                                             fieldKey={[fieldKey, 'unit']}
                                             rules={[{required: true, message: 'Выберите единицу измерения'}]}
@@ -54,9 +57,11 @@ const IngredientsList: FC = () => {
                                     </Col>
                                     <Col span={3} className={'center-right'}>
                                         <Form.Item>
-                                            <Tooltip title={'Удалить'}>
-                                                <MinusCircleOutlined onClick={() => remove(name)}/>
-                                            </Tooltip>
+                                            <Button onClick={() => remove(name)}>
+                                                <Tooltip title={'Удалить'}>
+                                                    <DeleteOutlined/>
+                                                </Tooltip>
+                                            </Button>
                                         </Form.Item>
                                     </Col>
                                 </Fragment>

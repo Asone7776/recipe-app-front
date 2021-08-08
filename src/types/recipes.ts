@@ -13,7 +13,8 @@ export interface RecipeInterface {
     updated_at: Date,
     categories: CategoryInterface[] | [],
     tags: TagInterface[] | [],
-    ingredients: IngredientInterface[] | []
+    ingredients: IngredientInterface[] | [],
+    details: RecipesDetailsInterface[] | []
 }
 
 export interface RecipesLookupInterface {
@@ -33,4 +34,10 @@ export interface RecipesInterface {
         type: string
     },
     isLoading: boolean,
+}
+
+export interface RecipesDetailsInterface {
+    name: string,
+    description?: string,
+    position?: string
 }

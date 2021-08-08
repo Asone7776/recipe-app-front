@@ -8,6 +8,12 @@ export interface IngredientInterface {
     updated_at?: Date,
     recipes: RecipeInterface[]
     value?: number,
+    pivot?: {
+        ingredient_id: number,
+        recipe_id: number,
+        count: number,
+        unit: number
+    }
 }
 
 export interface IngredientsResponse {

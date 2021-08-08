@@ -15,7 +15,7 @@ import {IngredientInterface} from "../../types/ingredients";
 import RecipeDetail from "./RecipeDetail";
 import IngredientsList from "./IngredientsList";
 import arrayMove from "array-move";
-import {IngredientsListInterface} from '../../types/ingredients';
+import {RecipesDetailsInterface} from '../../types/recipes';
 
 interface RecipeValues {
     name: string,
@@ -25,6 +25,7 @@ interface RecipeValues {
     categories?: CategoryInterface[],
     tags?: TagInterface[],
     ingredients?: IngredientInterface[],
+    details?: RecipesDetailsInterface[]
 }
 
 const AddAndEditRecipe: FC = () => {
@@ -55,20 +56,14 @@ const AddAndEditRecipe: FC = () => {
                             value: tag.id,
                             label: tag.name
                         }
-                    }),
-                    ingredients: data.ingredients && data.ingredients.map((ingredient: IngredientInterface) => {
-                        return {
-                            value: ingredient.id,
-                            label: ingredient.name
-                        }
-                    }),
+                    })
                 });
             });
         }
     }, [location])
     useEffect(() => {
         if (editRecipe) {
-            let {name, description, time_to_complete, level_id, categories, tags, ingredients} = editRecipe;
+            let {name, description, time_to_complete, level_id, categories, tags, ingredients, details} = editRecipe;
             form.setFieldsValue({
                 name,
                 description,
@@ -76,7 +71,14 @@ const AddAndEditRecipe: FC = () => {
                 level_id,
                 categories,
                 tags,
-                ingredients
+                ingredients: ingredients && ingredients.map(ingItem => {
+                    return {
+                        ingredient_id: ingItem.pivot && ingItem.pivot.ingredient_id,
+                        count: ingItem.pivot && ingItem.pivot.count,
+                        unit: ingItem.pivot && ingItem.pivot.unit,
+                    };
+                }),
+                details
             })
         }
     }, [editRecipe, form]);
@@ -91,7 +93,6 @@ const AddAndEditRecipe: FC = () => {
             time_to_complete: values.time_to_complete && moment(values.time_to_complete).format('HH:mm:ss'),
             categories: values.categories && values.categories.map((cat) => cat.value),
             tags: values.tags && values.tags.map((tag) => tag.value),
-            ingredients: values.ingredients && values.ingredients.map((ingredient) => ingredient.value),
         };
         if (editRecipe) {
             dispatch(updateRecipe({

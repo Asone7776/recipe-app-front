@@ -80,7 +80,7 @@ interface SearchComponentProps {
     lookupUrl: string,
     placeholder?: string,
     initialSearchValue?: string,
-    initialValue: any[],
+    initialValue?: any[],
     onSelect: (val: any[]) => void
 }
 
@@ -92,6 +92,11 @@ const SearchComponent: FC<SearchComponentProps> = ({
                                                        initialValue
                                                    }) => {
     const [value, setValue] = useState<any[]>([]);
+    useEffect(() => {
+        if (initialValue && initialValue.length > 0) {
+            setValue(initialValue);
+        }
+    }, [initialValue])
     return (
         <DebounceSelect
             mode="multiple"
